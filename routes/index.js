@@ -4,6 +4,13 @@ var fs = require('fs');
 
 var PATH ='./public/data/';
 
+// const requireAuthentication = function(req, res, next) {
+//   if(!req.cookies.user){
+//     return res.render('login',{});
+//   }
+// }
+// router.all('*', requireAuthentication)
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: '首页' });
@@ -20,7 +27,12 @@ router.get('/tuijian', function(req, res, next) {
   res.render('tuijian', { });
 });
 
+
+
+
+
 router.get('/edit', function(req, res, next) {
+
   if(!req.cookies.user){
     return res.render('login',{});
   }
