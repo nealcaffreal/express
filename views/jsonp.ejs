@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>jsonp请求</title>
+</head>
+
+<body>
+  <button id="btn">点击</button>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript">
+    $('#btn').click(function () {
+      var frame = document.createElement('script');
+      frame.src = 'http://localhost:3000/jsonp/article-list?name=leo&age=30&callback=func';
+      $('body').append(frame);
+    });
+    function func(res) {
+      alert(res.message + res.name + '你已经' + res.age + '岁了');
+    }
+  </script>
+</body>
+
+</html>
