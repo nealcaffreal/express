@@ -21,16 +21,45 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/data', data);
 app.use('/jsonp', jsonp);
 
 
+var options = {
+  dotfiles: 'ignore',
+  etag: true,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  lastModified: true,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
 
+app.use(express.static('public', options))
 
+// console.dir(app.locals.title)
+// => 'My App'
 
+// app.param('id', function (req, res, next, id) {
+//   console.log('CALLED ONLY ONCE')
+//   next()
+// })
+
+// app.get('/user/:id', function (req, res, next) {
+//   console.log('although this matches')
+//   next()
+// })
+
+// app.get('/user/:id', function (req, res) {
+//   console.log('and this matches too')
+//   res.end()
+// })
 
 
 
